@@ -1,0 +1,56 @@
+<div *ngIf="!canvasShow">
+    <canvas id="canvas{{docIndex}}" [style.height]="docHeight + 'px'" style="width:100%;border:1px solid darkgrey;object-fit: contain;"></canvas>
+    <div class="cnavas-zoom doc-nav">
+        <div class="doc-button doc-prev">
+            <div class="butt-inner" id="zoomout">
+                <i class="fa fa-search-minus  m-0"></i>
+            </div>
+        </div>
+        <div class="doc-button doc-prev">
+            <div class="butt-inner" id="zoomin">
+                <i class="fa fa-search-plus  m-0"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<h6 *ngIf="docFile == ''" class="red-color text-center">
+    Document not found
+</h6>
+
+<div [hidden]="HidepdfViewer" style="max-height: 80vh;overflow-y: scroll;">
+    <ng-container *ngIf='src!=null || src!=undefined || src!=""'>
+        <!-- <pdf-viewer [zoom]="zoom" [autoresize]="true"  [style.height]="docHeight + 'px'" [render-text]="true"
+          [original-size]="false" style="display: block;max-width: 100%;" [src]="src">
+        </pdf-viewer> -->
+        
+        <!-- {{src}} -->
+        <!-- <pdf-viewer [src]="pdfSource" [render-text]="renderText" [render-text-mode]="renderTextMode" [rotation]="rotation"
+            [zoom]="zoom" [zoom-scale]="zoomScale" [original-size]="originalSize" [fit-to-page]="fitToPage" [show-all]="showAll"
+            [autoresize]="autoresize" [show-borders]="showBorders" (after-load-complete)="callBackFn($event)"
+            (page-rendered)="pageRendered($event)" (text-layer-rendered)="textLayerRendered($event)" (error)="onError($event)"
+            (on-progress)="onProgress($event)"> -->
+        <!-- </pdf-viewer> -->
+        <iframe *ngIf="src" [style.height]="docHeight + 'px'" [src]="src"></iframe>
+    </ng-container>
+</div>
+<div class="cnavas-zoom doc-nav" *ngIf="!HidepdfViewer">
+    <div class="doc-button doc-prev">
+        <div class="butt-inner" (click)="incrementZoom(-0.1)">
+            <i class="fa fa-search-minus  m-0"></i>
+        </div>
+    </div>
+    <div class="doc-button doc-prev">
+        <div class="butt-inner" (click)="incrementZoom(0.1)">
+            <i class="fa fa-search-plus  m-0"></i>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="!docFile">
+    <div class="col-12">
+        <h6 class="text-capitalize text-secondary py-3 text-center">
+            Document not found
+        </h6>
+    </div>
+</ng-container>
+<div style="width: 100%">
+</div>

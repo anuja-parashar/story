@@ -1,0 +1,32 @@
+.graph-wrapper {
+        text-align: center;
+}
+.graph-exp {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0.7rem 0;
+        .exp-item {
+                display: flex;
+                align-items: center;
+                margin-right: 10px;
+                .dot {
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 60px;
+                        margin-right: 10px;
+                        &.yellowgreen {
+                                background: yellowgreen;
+                        }
+                        &.tomato {
+                                background: tomato;
+                        }
+                }
+                .item-txt {
+                        font-size: 0.9rem;
+                        span {
+                                font-weight: 600;
+                        }
+                }
+        }
+}

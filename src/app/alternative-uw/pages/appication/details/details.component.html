@@ -1,0 +1,177 @@
+<div class="overview" *ngIf="!isLoading">
+    <div class="overview-inner">
+        <div class="form-row overview-header">
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-body app-number no-shadow border-1 d-md-flex justify-content-between align-items-center">
+                                <div class="col-md-4">
+                                    <button routerLink="/alt-uw/list" class="btn d-flex align-items-center btn-outline-danger">
+                                        <mat-icon class="mr-2">keyboard_backspace</mat-icon> back to applicant list
+                                    </button>
+                                </div>
+                                <h5 class="mb-md-0">
+                                    Application Number - <span>{{common?.applicationId}}</span>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card">
+                    <div class="card-body applicant-details no-shadow border-1">
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <div class="d-flex">
+                                    <div class="app-det-image-side" *ngIf='!applicantDetails.selfie'>
+                                        <div class="img-fluid primary-image">
+                                            <img [src]="photoPath" class="img-fluid primary-image" alt="" width="100"
+                            onerror="this.src='/assets/thumbnail.jpg'"> 
+                                        </div>
+                                    </div>
+                                    <div class="app-det-image-side" *ngIf='applicantDetails.selfie'>
+                                        <img [src]="applicantDetails.selfie" class="img-fluid primary-image"
+                                            alt="" width="100">
+                                    </div>
+                                    <div class="details-side">
+                                        <h6 class="text-uppercase mb-0">
+                                            {{applicantDetails?.personal_data?.full_name}}
+                                        </h6>
+                                        <div *ngIf="applicantDetails?.personal_data?.email_id" class="d-flex align-items-center mb-1">
+                                            <i class="fas fa-envelope mr-2"></i>
+                                            <p class="font-weight-thin text-secondary mb-1">
+                                                {{applicantDetails?.personal_data?.email_id}}
+                                                
+                                            </p>
+                                        </div>
+                                        <div *ngIf="applicantDetails?.personal_data?.phone_no" class="d-flex align-items-center mb-1">
+                                            <i class="fas fa-phone mr-2"></i>
+                                            <p class="font-weight-thin text-secondary mb-1">
+                                                {{applicantDetails?.personal_data?.phone_no}}
+                                                
+                                            </p>
+                                        </div>
+                                        <div *ngIf="applicantDetails?.personal_data?.dob" class="d-flex align-items-center">
+                                            <i class="fas fa-birthday-cake mr-2"></i>
+                                            <p class="font-weight-thin text-secondary mb-1">
+                                                {{applicantDetails?.personal_data?.dob}} 
+                                                <span>
+                                                    ( {{applicantDetails?.personal_data?.age}} Years )                                                
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+                              
+                            </div>
+                            <div class="col-md-4">
+                                <div>
+                                    <h6 class="text-capitalize mt-md-0 mt-3 app-det-title">
+                                        Plan name
+                                    </h6>
+                                    <p class="text-left text-muted font-sm  mt-md-0 mt-3 mb-2  pr-2">
+                                        {{applicantDetails?.policy_data?.plan_name}}
+                                    </p>
+                                </div>
+                                <div>
+                                    <h6 class="text-capitalize mt-md-0 mt-3 app-det-title">
+                                        Sum assured
+                                    </h6>
+                                    <p class="text-left text-muted font-sm  mt-md-0 mt-3 mb-2  pr-2">
+                                        {{applicantDetails?.policy_data?.sum_assured}}
+                                    </p>
+                                </div>
+                                <div>
+                                    <h6 class="text-capitalize mt-md-0 mt-3 app-det-title">
+                                        Policy term
+                                    </h6>
+                                    <p class="text-left text-muted font-sm  mt-md-0 mt-3 mb-2  pr-2">
+                                        {{ applicantDetails?.personal_data?.premium_paying_term}}
+                                    </p>
+                                </div>
+                                <div>
+                                    <h6 class="text-capitalize mt-md-0 mt-3 app-det-title">
+                                        Premium
+                                    </h6>
+                                    <p class="text-left text-muted font-sm  mt-md-0 mt-3 mb-2  pr-2">
+                                        {{applicantDetails?.policy_data?.premium}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4" >
+                                <div>
+                                    <h6 class="text-capitalize mt-md-0 mt-3 app-det-title">
+                                        Premium payment term
+                                    </h6>
+                                    <p class="text-left text-muted font-sm  mt-md-0 mt-3 mb-2  pr-2">
+                                        {{applicantDetails?.personal_data?.premium_paying_term}}
+                                        
+                                    </p>
+                                </div>
+                                <h6 class="text-capitalize mt-md-0 mt-3 app-det-title">
+                                    Location
+                                </h6>
+                                <p class="text-left text-capitalize text-muted font-sm  mt-md-0 mt-3 mb-2  pr-2">
+                                    {{applicantDetails?.personal_data?.address}}
+                                </p>
+
+                                <div>
+                                    <h6 class="text-capitalize mt-md-0 mt-3 app-det-title">
+                                        Policy Status
+                                    </h6>
+                                    <p class="text-left text-muted text-capitalize font-sm  mt-md-0 mt-3 mb-2  pr-2">
+                                        <span class="text-warning" *ngIf="applicantDetails?.personal_data?.stp_status === 'pending'"><b>Pending</b></span>
+                                        <span class="text-danger" *ngIf="applicantDetails?.personal_data?.stp_status === 'reject'"><strong>Reject</strong></span>
+                                        <span class="text-success" *ngIf="applicantDetails?.personal_data?.stp_status === 'accept'"><strong>Accept</strong></span>
+                                        <span class="text-success" *ngIf="applicantDetails?.personal_data?.stp_status === 'STP'"><strong>STP</strong></span>
+                                        <span *ngIf="applicantDetails?.personal_data?.stp_status != 'pending' && applicantDetails?.personal_data?.stp_status != 'reject' && applicantDetails?.personal_data?.stp_status != 'accept' && applicantDetails?.personal_data?.stp_status != 'STP' && applicantDetails?.personal_data?.stp_status != 'NSTP'">
+                                            <b>{{applicantDetails?.personal_data?.stp_status}}</b>
+                                        </span>
+                                        <b *ngIf="applicantDetails?.personal_data?.stp_status ==='NSTP'">Referred To Underwriter</b>
+                                    </p>
+                                </div>
+                                <div>
+                                    <h6 class="text-capitalize mt-md-0 mt-3 app-det-title">
+                                        Plan Type
+                                    </h6>
+                                    <p class="text-left text-muted font-sm  mt-md-0 mt-3 mb-2  pr-2">
+                                        Term
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+
+        <div class="my-3">
+            <div class="custom-tab">
+                <a class="tab-item" routerLink='/alt-uw/details/{{common.applicationId}}/{{nav.url}}'
+                    routerLinkActive='active' *ngFor='let nav of nav_tabs;let i = index'>
+                    <div class="tab-inner tab-link">
+                        <h5 class="link-item">
+                            {{nav.title}}
+                        </h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="p-0">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf='isLoading'>
+    <div class="col-12  border-1 rounded">
+        <h3 class="text-capitalize text-secondary py-3 mb-0 text-center">Loading</h3>
+    </div>
+</div>
