@@ -242,7 +242,8 @@ export class AppicationComponent implements OnInit {
                 positionClass: 'toast-top-right',
               }
             );
-     
+            this.dataSource.filter = '' + Math.random();
+            this.dataSource.paginator = this.paginator   
       }
     }
     else{
