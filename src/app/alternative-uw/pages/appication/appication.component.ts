@@ -88,7 +88,7 @@ export class AppicationComponent implements OnInit {
   getData() {
     this._api.allApplicanteList().subscribe((res: any) => {
       this.applicant_list = res.results;
-      this.dataSource = this.applicant_list;
+      this.dataSource.data = this.applicant_list;
       this.dataSource.paginator = this.paginator;
       // dynamically change the 5 boxes lengths
       this.displayAndChangeBoxesLengths()
@@ -122,7 +122,7 @@ export class AppicationComponent implements OnInit {
       const filteredResults = this.applicant_list.filter(obj => obj.insertion_datetime >= this.fromDate && obj.insertion_datetime <= this.toDate);
       this.filteredData = filteredResults;
       const filteredBooks = this.filteredData.filter(val => val.stp_status.includes(this.variables.status));
-      this.dataSource = filteredBooks;
+      this.dataSource.data = filteredBooks;
       console.log('filteredBooks', filteredBooks)
       this.dataSource = filteredBooks.filter((item: any) => {
         console.log('b')
@@ -137,7 +137,7 @@ export class AppicationComponent implements OnInit {
    const filteredResults = this.applicant_list.filter(obj => obj.insertion_datetime >= this.fromDate && obj.insertion_datetime <= this.toDate);
    this.filteredData = filteredResults;
    const filteredBooks = this.filteredData.filter(val => val.stp_status.includes(this.variables.status));
-      this.dataSource = filteredBooks;
+      this.dataSource.data = filteredBooks;
       console.log('filteredBooks', filteredBooks)
       this.dataSource = filteredBooks.filter((item: any) => {
         console.log('b')
@@ -146,7 +146,7 @@ export class AppicationComponent implements OnInit {
         return fullName.includes(this.searchText) || applicationId.includes(this.searchText);
       });
 
-  
+      this.dataSource.filter = '' + Math.random();
     this.dataSource.paginator = this.paginator   
 
 
