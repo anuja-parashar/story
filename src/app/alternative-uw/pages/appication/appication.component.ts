@@ -108,7 +108,14 @@ export class AppicationComponent implements OnInit {
       map((res: any) => {
         let filteredData = res.results;
         if (fromDate && toDate) {
-          filteredData = filteredData.filter((item: any) => item.insertion_datetime >= this.fromDate && item.insertion_datetime <= this.toDate);
+          const startOfFromDate = new Date(fromDate);
+          const endOfToDate = new Date(toDate);
+          endOfToDate.setHours(23, 59, 59, 999);
+  
+          filteredData = filteredData.filter((item: any) => {
+            const itemDate = new Date(item.insertion_datetime);
+            return itemDate >= startOfFromDate && itemDate <= endOfToDate;
+          });
         }
         if (status) {
           filteredData = filteredData.filter((item: any) => item.stp_status === status);
